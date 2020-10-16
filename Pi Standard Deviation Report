@@ -1,28 +1,10 @@
-
+DeAndre Bethell's Pi Approximator Report
 
     How many darts did you need in a game in order to reliably compute Pi to 3 digits (3.14)?
 
-ANS: I needed 108 games and approximately 54 darts in order to reliably compute Pi to 3 digits
+ANS: I needed 37141 games and approximately 29224.0 darts in my radius in order to reliably compute Pi to 3 digits
 
     What was the standard deviation in this case?
 
 ANS:
-Sample of numbers for 108 Games: 3.15, 4, 4, 3.2, 2, 1.4,2,1.4,2.7, 3.0, 3.11, 3.5, 3.25, 3.12, 2.7, 3.11,3.0,3.14......
-
-Count: 108
-Sum: 207.12
-Mean: 1.91 (Arithmetic mean = Sum / Count)
-
-(Take each number, subtract the mean and square the result)
-Differences:
-0.27, 1.12, 1.12, 0.32, -0.87, -1.47, -0.87, -1.47, -0.17, 0.12, 0.23, 0.62, 0.37, 0.24, -0.17, 023, 0.12, 0.26......
-
-(Every Number minus Mean)
-Differences:
-0.07, 1.26, 1.26, 0.10, 0.76, 2.18, 0.76, 2.18, 0.03, 0.05, 0.05, 0.38, 0.13, 0.05, 0.03, 0.05, 0.01, 0.06.......
-
-Sum of Differences: 9.4594 (Add up the Squared Differences)
-
-Variance: 0.52 (Sum of Differences / Count)
-
-Standard Deviation: 0.72 (The square root of the Variance
+Standard Deviation: 6.106012288607089 
