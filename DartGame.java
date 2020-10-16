@@ -2,84 +2,100 @@
 //DeAndre Bethell
 //October 1st 2020
 
+//imports packages;
+import java.util.*;
 import java.lang.Math;
 
-public class DartGame {
-	 
-	 public DartGame() {
-	 }
-	 
-	 public Double [][] randomGen(int size){
-		  int count = size;
-		  Double[][] pairs = new Double[size][size * 2];
-		  for(int i = 0; i < count; i++){
-			 for(int j = 0; j < count; j++) {
-				  Double x = Math.random() * 0.5;
-				  Double y = Math.random() * 0.5;
-				  pairs[i][j] = x;
-				  j++;
-				  pairs[i][j] = y;
-			 }
-		  }
-		  return pairs;
-	 }
-	  
-	 
-	 public Double[] centerDistance(Double [][] pairs) {
-	  Double[] distance = new Double[pairs.length];
-	  for(int i =0; i <= pairs.length-1; i++) {
-		  for(int j = 0; j < (pairs.length-1) * 2; j++) {
-			   Double x = pairs[i][j];
-			   j++;
-			   Double y = pairs[i][j];
-			   Double z = Math.sqrt((x*x)+(y*y));
-			   distance [i] = z;
-		  }
-	  }
-	  
-	  return distance;
-	 }
-	 
-	  public double radiusCount(Double[] distance) {
-	  double dartPoints = 0.0;
-	  for(int i = 0; i <= distance.length - 1; i++) {
-	   if(distance[i] < 0.5) {
-	    dartPoints ++;
-	   }
-	   else;
-	  }
-	  System.out.println();
-	  return dartPoints;
-	 }
-	  public double standDev(Double[] distance) {
-		  double sum = 0.0;
-		  double mean = 0.0;
-		  double min = distance[0];
-		  double sd = 0.0;
-		  
-		  for (int i = 0; i < distance.length; i++){
-		  sum = sum + distance[i];
-		  }
-		  mean = sum / distance.length;
-		  
-		  for(int i = 0; i < distance.length; i++) {
-		  sd += Math.pow(distance[i] - mean, sd) *(distance[i] - mean) / distance.length;
-		  }
-		  double standDeviation = Math.sqrt(sd);
-		 System.out.println("Standard Deviation" + standDeviation);
-		  return standDeviation;
-		  } 
-// Main method
-	 public static void main(String args[]) {
-	  
-	  DartGame game = new DartGame();
-	  int dartGame = (int) ((Math.random()* 500)+1.0);
-	  System.out.println("Number of games: "  + dartGame);
-	  Double [][] pairs = game.randomGen(dartGame);
-	  Double[] distance = game.centerDistance(pairs);
-	  double radCount = game.radiusCount(distance);
-	  double attempt = 4 * (radCount / pairs.length);
-	  System.out.println(attempt);
-	  
-	 }
+
+// creates Dart Game;
+public class DartGame 
+{
+ 
+ // Runs the dart game by implementing a random Generator
+ public DartGame() 
+ {
+ }
+ //Creates and returns a new HashMap
+ public HashMap<Double, Double> randomGenerator(int size) 
+ {
+  int count = size;
+  HashMap<Double, Double> pairs = new HashMap<Double, Double>();
+  	while(count > 0) 
+	{
+  	Double x = (Math.random() * 1) - 0.5;
+  	Double y = (Math.random() * 1) - 0.5;
+  	pairs.put(x, y);
+  	count--;
+  	}
+  return pairs;
+ }
+	
+ // Computes the center Distance of the Dart Board
+ public Double[] centerDistance(HashMap<Double, Double> pairs) 
+ {
+  Set<Double> keys = pairs.keySet();
+  Double[] array = keys.toArray(new Double[keys.size()]);
+  Double[] distance = new Double[keys.size()];
+  	for(int i = 0; i <= pairs.size() - 1; i++) 
+	{
+   	Double x = array[i];
+   	Double y = pairs.get(x);
+   	Double d = Math.sqrt(x*x+y*y);
+   	distance[i] = d;
+  }
+  return distance;
+ }
+	
+ // Returns the points computed
+ public double radiusCount(Double[] dis) 
+ {
+ double points = 0.0;
+ for(int i = 0; i <= dis.length - 1; i++) 
+	{
+   if(dis[i] < 0.5) 
+	{
+    	points ++;
+   	}
+   else;
+  }
+  System.out.println(points);
+  return points;
+ }
+	
+ //Returns the standardDeviation
+ public double standDev(Double[] dis) 
+ {
+  double sum = 0;
+  double mean = 0;
+  double standardDev = 0.0;
+  
+  for (int i = 0; i < dis.length; i++)
+  {
+   sum = sum + dis[i];
+  }
+  mean = sum / dis.length;
+  
+  for(int i = 0; i < dis.length; i++) 
+  {
+   standardDev += Math.pow((dis[i] - mean) * (dis[i] - mean), 2);
+  }
+  double standDeviation = Math.sqrt(standardDev);
+  return standDeviation;
+ }
+	
+// Main Method
+ public static void main(String args[]) 
+ {	 
+  DartGame dartGame = new DartGame();
+  int range = (5000) + 40000;
+  int numGames = (int)(Math.random() * range);
+  System.out.println("Number of Games: " + numGames);
+  HashMap<Double, Double> pairs = dartGame.randomGenerator(numGames);
+  Double[] distance = dartGame.centerDistance(pairs);
+  double standardDeviation = dartGame.standDev(distance);
+  System.out.println("Standard Deviation: " + standardDeviation);
+  double radiusCount = dartGame.radiusCount(distance);
+  double gamesPlayed = 4 * (radiusCount / pairs.size());
+  System.out.println(gamesPlayed);
+ }
 }
