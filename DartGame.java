@@ -47,12 +47,13 @@ public class DartGame
  }
 	
  // Returns the points computed
- public double radiusCount(Double[] dis) 
+  // Returns the points computed
+ public double radiusCount(Double[] radius) 
  {
  double points = 0.0;
- for(int i = 0; i <= dis.length - 1; i++) 
+ for(int i = 0; i <= radius.length - 1; i++) 
 	{
-   if(dis[i] < 0.5) 
+   if(radius[i] < 0.5) 
 	{
     	points ++;
    	}
@@ -63,24 +64,25 @@ public class DartGame
  }
 	
  //Returns the standardDeviation
- public double standDev(Double[] dis) 
+ public double standDev(Double[] points) 
  {
-  double sum = 0;
-  double mean = 0;
+  double sum = 0.0;
+  double mean = 0.0;
   double standardDev = 0.0;
-  
-  for (int i = 0; i < dis.length; i++)
+  for (int i = 0; i < points.length; i++)
   {
-   sum = sum + dis[i];
+   sum = sum + points[i];
   }
-  mean = sum / dis.length;
+  mean = sum / points.length;
   
-  for(int i = 0; i < dis.length; i++) 
+  for(int i = 0; i < points.length; i++) 
   {
-   standardDev += Math.pow((dis[i] - mean) * (dis[i] - mean), 2);
+	  standardDev += (points[i]- mean) * (points[i] - mean);	  
+	  //standardDev += Math.pow((points[i] - mean) * (points[i] - mean), 2);
   }
-  double standDeviation = Math.sqrt(standardDev);
-  return standDeviation;
+  //double standDeviation = Math.sqrt(standardDev);
+  //return standDeviation;
+ return standardDev;
  }
 	
 // Main Method
@@ -95,7 +97,7 @@ public class DartGame
   double standardDeviation = dartGame.standDev(distance);
   System.out.println("Standard Deviation: " + standardDeviation);
   double radiusCount = dartGame.radiusCount(distance);
-  double gamesPlayed = 4 * (radiusCount / pairs.size());
-  System.out.println(gamesPlayed);
+  double piEstimate = 4 * (radiusCount / pairs.size());
+  System.out.println(piEstimate);
  }
 }
